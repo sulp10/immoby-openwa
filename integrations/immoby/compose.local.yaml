@@ -1,0 +1,16 @@
+# Temporary Mac hosting. No private host files need broader permissions.
+services:
+  bot-api:
+    volumes: !override
+      - bot-state:/app/data
+      - private-runtime:/app/private:ro
+    ports:
+      - 127.0.0.1:18080:8080
+  agent:
+    volumes: !override
+      - bot-state:/app/data
+      - private-runtime:/app/private:ro
+volumes:
+  private-runtime:
+    name: immoby-guest-private-runtime
+    external: true

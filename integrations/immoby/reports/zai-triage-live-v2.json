@@ -1,0 +1,1157 @@
+{
+  "model": "glm-5.3-flash",
+  "synthetic_cases": true,
+  "context_note": "Cases 025 and 036 are follow-ups to verified access assistance. Other cases have no previous issue.",
+  "results": [
+    {
+      "case_id": "case-001",
+      "prior_issue": null,
+      "expected_severity": "critical",
+      "expected_issue": "other",
+      "answer": {
+        "issue": "other",
+        "severity": "critical",
+        "retrieval_query_it": "emergenza gas fugas elettrodomestici cucina contatto",
+        "search_kind": "none",
+        "failed_previous_step": false,
+        "requested_human": false
+      },
+      "usage": {
+        "completion_tokens": 57,
+        "completion_tokens_details": {
+          "reasoning_tokens": 8
+        },
+        "prompt_tokens": 361,
+        "prompt_tokens_details": {
+          "cached_tokens": 0
+        },
+        "total_tokens": 418
+      },
+      "seconds": 3.58,
+      "severity_match": true,
+      "issue_match": true
+    },
+    {
+      "case_id": "case-002",
+      "prior_issue": null,
+      "expected_severity": "critical",
+      "expected_issue": "power",
+      "answer": {
+        "issue": "power",
+        "severity": "critical",
+        "retrieval_query_it": "fumo quadro elettrico emergenza",
+        "search_kind": "none",
+        "failed_previous_step": false,
+        "requested_human": false
+      },
+      "usage": {
+        "completion_tokens": 52,
+        "completion_tokens_details": {
+          "reasoning_tokens": 9
+        },
+        "prompt_tokens": 363,
+        "prompt_tokens_details": {
+          "cached_tokens": 0
+        },
+        "total_tokens": 415
+      },
+      "seconds": 3.3,
+      "severity_match": true,
+      "issue_match": true
+    },
+    {
+      "case_id": "case-003",
+      "prior_issue": null,
+      "expected_severity": "critical",
+      "expected_issue": "power",
+      "answer": {
+        "issue": "power",
+        "severity": "critical",
+        "retrieval_query_it": "scintille presa elettrica",
+        "search_kind": "none",
+        "failed_previous_step": false,
+        "requested_human": false
+      },
+      "usage": {
+        "completion_tokens": 51,
+        "completion_tokens_details": {
+          "reasoning_tokens": 0
+        },
+        "prompt_tokens": 361,
+        "prompt_tokens_details": {
+          "cached_tokens": 0
+        },
+        "total_tokens": 412
+      },
+      "seconds": 3.82,
+      "severity_match": true,
+      "issue_match": true
+    },
+    {
+      "case_id": "case-004",
+      "prior_issue": null,
+      "expected_severity": "critical",
+      "expected_issue": "power",
+      "answer": {
+        "issue": "power",
+        "severity": "critical",
+        "retrieval_query_it": "odore bruciato presa calda problema elettrico interruttore generale sicurezza",
+        "search_kind": "none",
+        "failed_previous_step": false,
+        "requested_human": false
+      },
+      "usage": {
+        "completion_tokens": 61,
+        "completion_tokens_details": {
+          "reasoning_tokens": 9
+        },
+        "prompt_tokens": 368,
+        "prompt_tokens_details": {
+          "cached_tokens": 320
+        },
+        "total_tokens": 429
+      },
+      "seconds": 2.6,
+      "severity_match": true,
+      "issue_match": true
+    },
+    {
+      "case_id": "case-005",
+      "prior_issue": null,
+      "expected_severity": "critical",
+      "expected_issue": "lift",
+      "answer": {
+        "issue": "lift",
+        "severity": "critical",
+        "retrieval_query_it": "",
+        "search_kind": "none",
+        "failed_previous_step": false,
+        "requested_human": false
+      },
+      "usage": {
+        "completion_tokens": 44,
+        "completion_tokens_details": {
+          "reasoning_tokens": 11
+        },
+        "prompt_tokens": 363,
+        "prompt_tokens_details": {
+          "cached_tokens": 320
+        },
+        "total_tokens": 407
+      },
+      "seconds": 2.41,
+      "severity_match": true,
+      "issue_match": true
+    },
+    {
+      "case_id": "case-006",
+      "prior_issue": null,
+      "expected_severity": "critical",
+      "expected_issue": "water",
+      "answer": {
+        "issue": "water",
+        "severity": "critical",
+        "retrieval_query_it": "acqua prese elettrici corto circuito sicurezza",
+        "search_kind": "none",
+        "failed_previous_step": false,
+        "requested_human": false
+      },
+      "usage": {
+        "completion_tokens": 44,
+        "completion_tokens_details": {
+          "reasoning_tokens": 0
+        },
+        "prompt_tokens": 363,
+        "prompt_tokens_details": {
+          "cached_tokens": 0
+        },
+        "total_tokens": 407
+      },
+      "seconds": 2.71,
+      "severity_match": true,
+      "issue_match": true
+    },
+    {
+      "case_id": "case-007",
+      "prior_issue": null,
+      "expected_severity": "critical",
+      "expected_issue": "other",
+      "answer": {
+        "issue": "other",
+        "severity": "critical",
+        "retrieval_query_it": "pianificazione di emergenza incendio uscite di sicurezza",
+        "search_kind": "none",
+        "failed_previous_step": false,
+        "requested_human": false
+      },
+      "usage": {
+        "completion_tokens": 54,
+        "completion_tokens_details": {
+          "reasoning_tokens": 7
+        },
+        "prompt_tokens": 366,
+        "prompt_tokens_details": {
+          "cached_tokens": 0
+        },
+        "total_tokens": 420
+      },
+      "seconds": 2.99,
+      "severity_match": true,
+      "issue_match": true
+    },
+    {
+      "case_id": "case-008",
+      "prior_issue": null,
+      "expected_severity": "critical",
+      "expected_issue": "other",
+      "answer": {
+        "issue": "other",
+        "severity": "critical",
+        "retrieval_query_it": "emergenza medica svenuto non risponde chiamare emergenze 118",
+        "search_kind": "none",
+        "failed_previous_step": false,
+        "requested_human": true
+      },
+      "usage": {
+        "completion_tokens": 62,
+        "completion_tokens_details": {
+          "reasoning_tokens": 11
+        },
+        "prompt_tokens": 365,
+        "prompt_tokens_details": {
+          "cached_tokens": 320
+        },
+        "total_tokens": 427
+      },
+      "seconds": 2.52,
+      "severity_match": true,
+      "issue_match": true
+    },
+    {
+      "case_id": "case-009",
+      "prior_issue": null,
+      "expected_severity": "critical",
+      "expected_issue": "access",
+      "answer": {
+        "issue": "access",
+        "severity": "critical",
+        "retrieval_query_it": "sicurezza ospiti persona sospetta minaccia portata reception",
+        "search_kind": "none",
+        "failed_previous_step": false,
+        "requested_human": true
+      },
+      "usage": {
+        "completion_tokens": 68,
+        "completion_tokens_details": {
+          "reasoning_tokens": 20
+        },
+        "prompt_tokens": 364,
+        "prompt_tokens_details": {
+          "cached_tokens": 320
+        },
+        "total_tokens": 432
+      },
+      "seconds": 2.79,
+      "severity_match": true,
+      "issue_match": true
+    },
+    {
+      "case_id": "case-010",
+      "prior_issue": null,
+      "expected_severity": "critical",
+      "expected_issue": "other",
+      "answer": {
+        "issue": "other",
+        "severity": "critical",
+        "retrieval_query_it": "emergenza gas fuga gas cucina contatto emergenze",
+        "search_kind": "none",
+        "failed_previous_step": false,
+        "requested_human": false
+      },
+      "usage": {
+        "completion_tokens": 60,
+        "completion_tokens_details": {
+          "reasoning_tokens": 5
+        },
+        "prompt_tokens": 359,
+        "prompt_tokens_details": {
+          "cached_tokens": 320
+        },
+        "total_tokens": 419
+      },
+      "seconds": 2.55,
+      "severity_match": true,
+      "issue_match": true
+    },
+    {
+      "case_id": "case-011",
+      "prior_issue": null,
+      "expected_severity": "critical",
+      "expected_issue": "power",
+      "answer": {
+        "issue": "power",
+        "severity": "critical",
+        "retrieval_query_it": "interruttore elettrico quadro elettrico spegnere corrente",
+        "search_kind": "none",
+        "failed_previous_step": false,
+        "requested_human": false
+      },
+      "usage": {
+        "completion_tokens": 58,
+        "completion_tokens_details": {
+          "reasoning_tokens": 7
+        },
+        "prompt_tokens": 360,
+        "prompt_tokens_details": {
+          "cached_tokens": 320
+        },
+        "total_tokens": 418
+      },
+      "seconds": 2.41,
+      "severity_match": true,
+      "issue_match": true
+    },
+    {
+      "case_id": "case-012",
+      "prior_issue": null,
+      "expected_severity": "critical",
+      "expected_issue": "lift",
+      "answer": {
+        "issue": "lift",
+        "severity": "critical",
+        "retrieval_query_it": "ascensore bloccato persona intrappolata emergenza tecnico ascensori",
+        "search_kind": "none",
+        "failed_previous_step": false,
+        "requested_human": true
+      },
+      "usage": {
+        "completion_tokens": 62,
+        "completion_tokens_details": {
+          "reasoning_tokens": 10
+        },
+        "prompt_tokens": 360,
+        "prompt_tokens_details": {
+          "cached_tokens": 320
+        },
+        "total_tokens": 422
+      },
+      "seconds": 2.52,
+      "severity_match": true,
+      "issue_match": true
+    },
+    {
+      "case_id": "case-013",
+      "prior_issue": null,
+      "expected_severity": "critical",
+      "expected_issue": "water",
+      "answer": {
+        "issue": "water",
+        "severity": "critical",
+        "retrieval_query_it": "",
+        "search_kind": "none",
+        "failed_previous_step": false,
+        "requested_human": false
+      },
+      "usage": {
+        "completion_tokens": 39,
+        "completion_tokens_details": {
+          "reasoning_tokens": 6
+        },
+        "prompt_tokens": 359,
+        "prompt_tokens_details": {
+          "cached_tokens": 320
+        },
+        "total_tokens": 398
+      },
+      "seconds": 2.77,
+      "severity_match": true,
+      "issue_match": true
+    },
+    {
+      "case_id": "case-014",
+      "prior_issue": null,
+      "expected_severity": "routine",
+      "expected_issue": "wifi",
+      "answer": {
+        "issue": "wifi",
+        "severity": "routine",
+        "retrieval_query_it": "connessione Wi-Fi non funziona password rete router istruzioni wifi",
+        "search_kind": "none",
+        "failed_previous_step": false,
+        "requested_human": false
+      },
+      "usage": {
+        "completion_tokens": 50,
+        "completion_tokens_details": {
+          "reasoning_tokens": 0
+        },
+        "prompt_tokens": 363,
+        "prompt_tokens_details": {
+          "cached_tokens": 320
+        },
+        "total_tokens": 413
+      },
+      "seconds": 3.27,
+      "severity_match": true,
+      "issue_match": true
+    },
+    {
+      "case_id": "case-015",
+      "prior_issue": null,
+      "expected_severity": "routine",
+      "expected_issue": "oven",
+      "answer": {
+        "issue": "oven",
+        "severity": "routine",
+        "retrieval_query_it": "forno non si accende istruzioni uso forno appartamento",
+        "search_kind": "none",
+        "failed_previous_step": false,
+        "requested_human": false
+      },
+      "usage": {
+        "completion_tokens": 57,
+        "completion_tokens_details": {
+          "reasoning_tokens": 0
+        },
+        "prompt_tokens": 360,
+        "prompt_tokens_details": {
+          "cached_tokens": 320
+        },
+        "total_tokens": 417
+      },
+      "seconds": 2.85,
+      "severity_match": true,
+      "issue_match": true
+    },
+    {
+      "case_id": "case-016",
+      "prior_issue": null,
+      "expected_severity": "routine",
+      "expected_issue": "toilet",
+      "answer": {
+        "issue": "toilet",
+        "severity": "routine",
+        "retrieval_query_it": "scarico WC bloccato non funziona wc",
+        "search_kind": "none",
+        "failed_previous_step": false,
+        "requested_human": false
+      },
+      "usage": {
+        "completion_tokens": 46,
+        "completion_tokens_details": {
+          "reasoning_tokens": 0
+        },
+        "prompt_tokens": 367,
+        "prompt_tokens_details": {
+          "cached_tokens": 320
+        },
+        "total_tokens": 413
+      },
+      "seconds": 3.38,
+      "severity_match": true,
+      "issue_match": true
+    },
+    {
+      "case_id": "case-017",
+      "prior_issue": null,
+      "expected_severity": "routine",
+      "expected_issue": "hot_water",
+      "answer": {
+        "issue": "hot_water",
+        "severity": "routine",
+        "retrieval_query_it": "acqua calda non funziona boiler scaldabagno istruzioni appartamento",
+        "search_kind": "none",
+        "failed_previous_step": false,
+        "requested_human": false
+      },
+      "usage": {
+        "completion_tokens": 62,
+        "completion_tokens_details": {
+          "reasoning_tokens": 0
+        },
+        "prompt_tokens": 358,
+        "prompt_tokens_details": {
+          "cached_tokens": 320
+        },
+        "total_tokens": 420
+      },
+      "seconds": 2.84,
+      "severity_match": true,
+      "issue_match": true
+    },
+    {
+      "case_id": "case-018",
+      "prior_issue": null,
+      "expected_severity": "routine",
+      "expected_issue": "access",
+      "answer": {
+        "issue": "access",
+        "severity": "routine",
+        "retrieval_query_it": "istruzioni apertura porta chiave non gira porta d'ingresso",
+        "search_kind": "none",
+        "failed_previous_step": false,
+        "requested_human": false
+      },
+      "usage": {
+        "completion_tokens": 48,
+        "completion_tokens_details": {
+          "reasoning_tokens": 0
+        },
+        "prompt_tokens": 369,
+        "prompt_tokens_details": {
+          "cached_tokens": 320
+        },
+        "total_tokens": 417
+      },
+      "seconds": 2.1,
+      "severity_match": true,
+      "issue_match": true
+    },
+    {
+      "case_id": "case-019",
+      "prior_issue": null,
+      "expected_severity": "routine",
+      "expected_issue": "power",
+      "answer": {
+        "issue": "power",
+        "severity": "routine",
+        "retrieval_query_it": "interruzione corrente elettrica appartamento quadro elettrico interruttore generale",
+        "search_kind": "none",
+        "failed_previous_step": false,
+        "requested_human": false
+      },
+      "usage": {
+        "completion_tokens": 74,
+        "completion_tokens_details": {
+          "reasoning_tokens": 11
+        },
+        "prompt_tokens": 368,
+        "prompt_tokens_details": {
+          "cached_tokens": 320
+        },
+        "total_tokens": 442
+      },
+      "seconds": 3.45,
+      "severity_match": true,
+      "issue_match": true
+    },
+    {
+      "case_id": "case-020",
+      "prior_issue": null,
+      "expected_severity": "routine",
+      "expected_issue": "lift",
+      "answer": {
+        "issue": "lift",
+        "severity": "uncertain",
+        "retrieval_query_it": "ascensore fuori servizio guasto ascensore contatto manutenzione ascensori",
+        "search_kind": "none",
+        "failed_previous_step": false,
+        "requested_human": false
+      },
+      "usage": {
+        "completion_tokens": 62,
+        "completion_tokens_details": {
+          "reasoning_tokens": 10
+        },
+        "prompt_tokens": 370,
+        "prompt_tokens_details": {
+          "cached_tokens": 320
+        },
+        "total_tokens": 432
+      },
+      "seconds": 2.91,
+      "severity_match": false,
+      "issue_match": true
+    },
+    {
+      "case_id": "case-021",
+      "prior_issue": null,
+      "expected_severity": "routine",
+      "expected_issue": "other",
+      "answer": {
+        "issue": "other",
+        "severity": "routine",
+        "retrieval_query_it": "piano cottura elettrico o gas attrezzatura appartamento cucina",
+        "search_kind": "none",
+        "failed_previous_step": false,
+        "requested_human": false
+      },
+      "usage": {
+        "completion_tokens": 50,
+        "completion_tokens_details": {
+          "reasoning_tokens": 0
+        },
+        "prompt_tokens": 374,
+        "prompt_tokens_details": {
+          "cached_tokens": 0
+        },
+        "total_tokens": 424
+      },
+      "seconds": 1.86,
+      "severity_match": true,
+      "issue_match": true
+    },
+    {
+      "case_id": "case-022",
+      "prior_issue": null,
+      "expected_severity": "routine",
+      "expected_issue": "other",
+      "answer": {
+        "issue": "other",
+        "severity": "routine",
+        "retrieval_query_it": "estintore antincendio posizione appartamento sicurezza",
+        "search_kind": "none",
+        "failed_previous_step": false,
+        "requested_human": false
+      },
+      "usage": {
+        "completion_tokens": 45,
+        "completion_tokens_details": {
+          "reasoning_tokens": 0
+        },
+        "prompt_tokens": 367,
+        "prompt_tokens_details": {
+          "cached_tokens": 0
+        },
+        "total_tokens": 412
+      },
+      "seconds": 3.11,
+      "severity_match": true,
+      "issue_match": true
+    },
+    {
+      "case_id": "case-023",
+      "prior_issue": null,
+      "expected_severity": "urgent",
+      "expected_issue": "access",
+      "answer": {
+        "issue": "access",
+        "severity": "critical",
+        "retrieval_query_it": "",
+        "search_kind": "none",
+        "failed_previous_step": false,
+        "requested_human": false
+      },
+      "usage": {
+        "completion_tokens": 100,
+        "completion_tokens_details": {
+          "reasoning_tokens": 67
+        },
+        "prompt_tokens": 375,
+        "prompt_tokens_details": {
+          "cached_tokens": 320
+        },
+        "total_tokens": 475
+      },
+      "seconds": 2.95,
+      "severity_match": false,
+      "issue_match": true
+    },
+    {
+      "case_id": "case-024",
+      "prior_issue": null,
+      "expected_severity": "uncertain",
+      "expected_issue": "lift",
+      "answer": {
+        "issue": "lift",
+        "severity": "uncertain",
+        "retrieval_query_it": "ascensore fermo guasto contatto assistenza ascensori",
+        "search_kind": "none",
+        "failed_previous_step": false,
+        "requested_human": false
+      },
+      "usage": {
+        "completion_tokens": 58,
+        "completion_tokens_details": {
+          "reasoning_tokens": 9
+        },
+        "prompt_tokens": 370,
+        "prompt_tokens_details": {
+          "cached_tokens": 320
+        },
+        "total_tokens": 428
+      },
+      "seconds": 2.1,
+      "severity_match": true,
+      "issue_match": true
+    },
+    {
+      "case_id": "case-025",
+      "prior_issue": "access",
+      "expected_severity": "routine",
+      "expected_issue": "access",
+      "answer": {
+        "issue": "access",
+        "severity": "routine",
+        "retrieval_query_it": "accesso appartamento codice portachiavi ingresso",
+        "search_kind": "none",
+        "failed_previous_step": true,
+        "requested_human": false
+      },
+      "usage": {
+        "completion_tokens": 45,
+        "completion_tokens_details": {
+          "reasoning_tokens": 0
+        },
+        "prompt_tokens": 371,
+        "prompt_tokens_details": {
+          "cached_tokens": 320
+        },
+        "total_tokens": 416
+      },
+      "seconds": 4.3,
+      "severity_match": true,
+      "issue_match": true
+    },
+    {
+      "case_id": "case-026",
+      "prior_issue": null,
+      "expected_severity": "routine",
+      "expected_issue": "access",
+      "answer": {
+        "issue": "access",
+        "severity": "routine",
+        "retrieval_query_it": "chiave non funziona accesso porta aprire porta",
+        "search_kind": "none",
+        "failed_previous_step": true,
+        "requested_human": false
+      },
+      "usage": {
+        "completion_tokens": 61,
+        "completion_tokens_details": {
+          "reasoning_tokens": 16
+        },
+        "prompt_tokens": 369,
+        "prompt_tokens_details": {
+          "cached_tokens": 320
+        },
+        "total_tokens": 430
+      },
+      "seconds": 3.26,
+      "severity_match": true,
+      "issue_match": true
+    },
+    {
+      "case_id": "case-027",
+      "prior_issue": null,
+      "expected_severity": "routine",
+      "expected_issue": "access",
+      "answer": {
+        "issue": "access",
+        "severity": "routine",
+        "retrieval_query_it": "",
+        "search_kind": "none",
+        "failed_previous_step": false,
+        "requested_human": false
+      },
+      "usage": {
+        "completion_tokens": 45,
+        "completion_tokens_details": {
+          "reasoning_tokens": 12
+        },
+        "prompt_tokens": 370,
+        "prompt_tokens_details": {
+          "cached_tokens": 320
+        },
+        "total_tokens": 415
+      },
+      "seconds": 2.59,
+      "severity_match": true,
+      "issue_match": true
+    },
+    {
+      "case_id": "case-028",
+      "prior_issue": null,
+      "expected_severity": "routine",
+      "expected_issue": "access",
+      "answer": {
+        "issue": "access",
+        "severity": "routine",
+        "retrieval_query_it": "codice accesso suite aggiornato",
+        "search_kind": "none",
+        "failed_previous_step": false,
+        "requested_human": false
+      },
+      "usage": {
+        "completion_tokens": 116,
+        "completion_tokens_details": {
+          "reasoning_tokens": 76
+        },
+        "prompt_tokens": 367,
+        "prompt_tokens_details": {
+          "cached_tokens": 320
+        },
+        "total_tokens": 483
+      },
+      "seconds": 3.86,
+      "severity_match": true,
+      "issue_match": true
+    },
+    {
+      "case_id": "case-029",
+      "prior_issue": null,
+      "expected_severity": "routine",
+      "expected_issue": "other",
+      "answer": {
+        "issue": "other",
+        "severity": "routine",
+        "retrieval_query_it": "deposito bagagli vicino alla struttura orari di apertura",
+        "search_kind": "luggage_storage",
+        "failed_previous_step": false,
+        "requested_human": false
+      },
+      "usage": {
+        "completion_tokens": 64,
+        "completion_tokens_details": {
+          "reasoning_tokens": 8
+        },
+        "prompt_tokens": 365,
+        "prompt_tokens_details": {
+          "cached_tokens": 320
+        },
+        "total_tokens": 429
+      },
+      "seconds": 3.51,
+      "severity_match": true,
+      "issue_match": true
+    },
+    {
+      "case_id": "case-030",
+      "prior_issue": null,
+      "expected_severity": "routine",
+      "expected_issue": "other",
+      "answer": {
+        "issue": "other",
+        "severity": "routine",
+        "retrieval_query_it": "parcheggio gratuito vicino appartamento",
+        "search_kind": "parking",
+        "failed_previous_step": false,
+        "requested_human": false
+      },
+      "usage": {
+        "completion_tokens": 46,
+        "completion_tokens_details": {
+          "reasoning_tokens": 3
+        },
+        "prompt_tokens": 361,
+        "prompt_tokens_details": {
+          "cached_tokens": 320
+        },
+        "total_tokens": 407
+      },
+      "seconds": 2.02,
+      "severity_match": true,
+      "issue_match": true
+    },
+    {
+      "case_id": "case-031",
+      "prior_issue": null,
+      "expected_severity": "routine",
+      "expected_issue": "wifi",
+      "answer": {
+        "issue": "wifi",
+        "severity": "routine",
+        "retrieval_query_it": "wifi lento rimborso problema connessione",
+        "search_kind": "none",
+        "failed_previous_step": false,
+        "requested_human": false
+      },
+      "usage": {
+        "completion_tokens": 68,
+        "completion_tokens_details": {
+          "reasoning_tokens": 24
+        },
+        "prompt_tokens": 368,
+        "prompt_tokens_details": {
+          "cached_tokens": 320
+        },
+        "total_tokens": 436
+      },
+      "seconds": 2.9,
+      "severity_match": true,
+      "issue_match": true
+    },
+    {
+      "case_id": "case-032",
+      "prior_issue": null,
+      "expected_severity": "routine",
+      "expected_issue": "access",
+      "answer": {
+        "issue": "access",
+        "severity": "routine",
+        "retrieval_query_it": "codici accesso suite",
+        "search_kind": "none",
+        "failed_previous_step": false,
+        "requested_human": false
+      },
+      "usage": {
+        "completion_tokens": 38,
+        "completion_tokens_details": {
+          "reasoning_tokens": 0
+        },
+        "prompt_tokens": 371,
+        "prompt_tokens_details": {
+          "cached_tokens": 320
+        },
+        "total_tokens": 409
+      },
+      "seconds": 2.13,
+      "severity_match": true,
+      "issue_match": true
+    },
+    {
+      "case_id": "case-033",
+      "prior_issue": null,
+      "expected_severity": "urgent",
+      "expected_issue": "other",
+      "answer": {
+        "issue": "other",
+        "severity": "urgent",
+        "retrieval_query_it": "riscaldamento non funzionante assistenza temperatura appartamento",
+        "search_kind": "none",
+        "failed_previous_step": false,
+        "requested_human": false
+      },
+      "usage": {
+        "completion_tokens": 72,
+        "completion_tokens_details": {
+          "reasoning_tokens": 26
+        },
+        "prompt_tokens": 372,
+        "prompt_tokens_details": {
+          "cached_tokens": 320
+        },
+        "total_tokens": 444
+      },
+      "seconds": 2.99,
+      "severity_match": true,
+      "issue_match": true
+    },
+    {
+      "case_id": "case-034",
+      "prior_issue": null,
+      "expected_severity": "critical",
+      "expected_issue": "water",
+      "answer": {
+        "issue": "water",
+        "severity": "critical",
+        "retrieval_query_it": "perdita acqua toilette allagamento emergenza idraulico urgenza",
+        "search_kind": "none",
+        "failed_previous_step": false,
+        "requested_human": false
+      },
+      "usage": {
+        "completion_tokens": 83,
+        "completion_tokens_details": {
+          "reasoning_tokens": 22
+        },
+        "prompt_tokens": 374,
+        "prompt_tokens_details": {
+          "cached_tokens": 320
+        },
+        "total_tokens": 457
+      },
+      "seconds": 4.29,
+      "severity_match": true,
+      "issue_match": true
+    },
+    {
+      "case_id": "case-035",
+      "prior_issue": null,
+      "expected_severity": "urgent",
+      "expected_issue": "power",
+      "answer": {
+        "issue": "power",
+        "severity": "uncertain",
+        "retrieval_query_it": "salvavita scatta continuamente interruttore differenziale riarmare quadro elettrico",
+        "search_kind": "none",
+        "failed_previous_step": false,
+        "requested_human": false
+      },
+      "usage": {
+        "completion_tokens": 91,
+        "completion_tokens_details": {
+          "reasoning_tokens": 24
+        },
+        "prompt_tokens": 370,
+        "prompt_tokens_details": {
+          "cached_tokens": 320
+        },
+        "total_tokens": 461
+      },
+      "seconds": 4.87,
+      "severity_match": false,
+      "issue_match": true
+    },
+    {
+      "case_id": "case-036",
+      "prior_issue": "access",
+      "expected_severity": "routine",
+      "expected_issue": "access",
+      "answer": {
+        "issue": "access",
+        "severity": "routine",
+        "retrieval_query_it": "",
+        "search_kind": "none",
+        "failed_previous_step": true,
+        "requested_human": false
+      },
+      "usage": {
+        "completion_tokens": 33,
+        "completion_tokens_details": {
+          "reasoning_tokens": 0
+        },
+        "prompt_tokens": 359,
+        "prompt_tokens_details": {
+          "cached_tokens": 320
+        },
+        "total_tokens": 392
+      },
+      "seconds": 2.54,
+      "severity_match": true,
+      "issue_match": true
+    },
+    {
+      "case_id": "case-037",
+      "prior_issue": null,
+      "expected_severity": "routine",
+      "expected_issue": "access",
+      "answer": {
+        "issue": "access",
+        "severity": "routine",
+        "retrieval_query_it": "posizione cassetta delle chiavi key box istruzioni check-in",
+        "search_kind": "none",
+        "failed_previous_step": false,
+        "requested_human": false
+      },
+      "usage": {
+        "completion_tokens": 57,
+        "completion_tokens_details": {
+          "reasoning_tokens": 8
+        },
+        "prompt_tokens": 365,
+        "prompt_tokens_details": {
+          "cached_tokens": 320
+        },
+        "total_tokens": 422
+      },
+      "seconds": 4.25,
+      "severity_match": true,
+      "issue_match": true
+    },
+    {
+      "case_id": "case-038",
+      "prior_issue": null,
+      "expected_severity": "critical",
+      "expected_issue": "access",
+      "answer": {
+        "issue": "other",
+        "severity": "critical",
+        "retrieval_query_it": "odore fumo corridoio emergenza",
+        "search_kind": "none",
+        "failed_previous_step": false,
+        "requested_human": false
+      },
+      "usage": {
+        "completion_tokens": 96,
+        "completion_tokens_details": {
+          "reasoning_tokens": 54
+        },
+        "prompt_tokens": 372,
+        "prompt_tokens_details": {
+          "cached_tokens": 320
+        },
+        "total_tokens": 468
+      },
+      "seconds": 2.87,
+      "severity_match": true,
+      "issue_match": false
+    },
+    {
+      "case_id": "case-039",
+      "prior_issue": null,
+      "expected_severity": "routine",
+      "expected_issue": "access",
+      "answer": {
+        "issue": "wifi",
+        "severity": "routine",
+        "retrieval_query_it": "codice wifi rete istruzioni connessione",
+        "search_kind": "none",
+        "failed_previous_step": false,
+        "requested_human": false
+      },
+      "usage": {
+        "completion_tokens": 130,
+        "completion_tokens_details": {
+          "reasoning_tokens": 86
+        },
+        "prompt_tokens": 366,
+        "prompt_tokens_details": {
+          "cached_tokens": 320
+        },
+        "total_tokens": 496
+      },
+      "seconds": 3.62,
+      "severity_match": true,
+      "issue_match": false
+    },
+    {
+      "case_id": "case-040",
+      "prior_issue": null,
+      "expected_severity": "critical",
+      "expected_issue": "oven",
+      "answer": {
+        "issue": "oven",
+        "severity": "critical",
+        "retrieval_query_it": "forno scintille presa elettrica stacco alimentazione assistenza",
+        "search_kind": "none",
+        "failed_previous_step": false,
+        "requested_human": false
+      },
+      "usage": {
+        "completion_tokens": 50,
+        "completion_tokens_details": {
+          "reasoning_tokens": 0
+        },
+        "prompt_tokens": 365,
+        "prompt_tokens_details": {
+          "cached_tokens": 320
+        },
+        "total_tokens": 415
+      },
+      "seconds": 1.92,
+      "severity_match": true,
+      "issue_match": true
+    },
+    {
+      "case_id": "case-041",
+      "prior_issue": null,
+      "expected_severity": "routine",
+      "expected_issue": "hot_water",
+      "answer": {
+        "issue": "hot_water",
+        "severity": "routine",
+        "retrieval_query_it": "acqua calda rubinetto boiler scaldabagno istruzioni",
+        "search_kind": "none",
+        "failed_previous_step": false,
+        "requested_human": false
+      },
+      "usage": {
+        "completion_tokens": 63,
+        "completion_tokens_details": {
+          "reasoning_tokens": 13
+        },
+        "prompt_tokens": 370,
+        "prompt_tokens_details": {
+          "cached_tokens": 320
+        },
+        "total_tokens": 433
+      },
+      "seconds": 2.51,
+      "severity_match": true,
+      "issue_match": true
+    }
+  ],
+  "severity_matches": 38,
+  "total": 41
+}
