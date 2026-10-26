@@ -1,0 +1,4 @@
+{
+  "name": "Immoby Guest Support",
+  "config": {"reconnectBaseDelay": 5000, "maxReconnectAttempts": 10}
+}

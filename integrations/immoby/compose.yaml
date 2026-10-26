@@ -1,0 +1,92 @@
+# Run on an always-on cloud VPS. No guest data is baked into either image.
+services:
+  openwa-api:
+    build:
+      context: https://github.com/rmyndharis/OpenWA.git#0fb74b28b2f85b6fbc013cefcc727072806c9b56
+    restart: unless-stopped
+    environment:
+      NODE_ENV: production
+      PORT: 2785
+      API_MASTER_KEY: ${OPENWA_API_KEY:?Configure a strong key}
+      DATABASE_TYPE: sqlite
+      DATABASE_NAME: /app/data/openwa.sqlite
+      DATABASE_SYNCHRONIZE: "true"
+      ENGINE_TYPE: baileys
+      AUTO_START_SESSIONS: "true"
+      SESSION_DATA_PATH: /app/data/sessions
+      BAILEYS_AUTH_DIR: /app/data/baileys
+      STORAGE_TYPE: local
+      STORAGE_LOCAL_PATH: /app/data/media
+      REDIS_ENABLED: "false"
+      QUEUE_ENABLED: "false"
+      MCP_ENABLED: "false"
+      SSRF_ALLOWED_HOSTS: bot-api
+    volumes:
+      - openwa-data:/app/data
+    # Administration stays private. Use an SSH tunnel or authenticated TLS proxy.
+    ports:
+      - 127.0.0.1:2785:2785
+    security_opt:
+      - no-new-privileges:true
+    stop_grace_period: 75s
+  bot-api:
+    build: .
+    restart: unless-stopped
+    environment: &bot-env
+      STATE_DIR: /app/data
+      DISCONNECT_GRACE_SECONDS: ${DISCONNECT_GRACE_SECONDS:-300}
+      OPENWA_BASE_URL: http://openwa-api:2785
+      OPENWA_API_KEY: ${OPENWA_API_KEY:?Configure a strong key}
+      OPENWA_SESSIONS: ${OPENWA_SESSIONS:?Configure session IDs after pairing}
+      OPENWA_WEBHOOK_SECRET: ${OPENWA_WEBHOOK_SECRET:?Configure an independent strong secret}
+      MODEL_PROVIDER: ${MODEL_PROVIDER:-zai}
+      ZAI_API_KEY: ${ZAI_API_KEY:-}
+      MOONSHOT_API_KEY: ${MOONSHOT_API_KEY:-}
+      DEEPSEEK_API_KEY: ${DEEPSEEK_API_KEY:-}
+      MISTRAL_API_KEY: ${MISTRAL_API_KEY:-}
+      BRAVE_SEARCH_API_KEY: ${BRAVE_SEARCH_API_KEY:-}
+      SMTP_HOST: ${SMTP_HOST:-}
+      SMTP_PORT: ${SMTP_PORT:-587}
+      SMTP_SECURITY: ${SMTP_SECURITY:-starttls}
+      SMTP_USER: ${SMTP_USER:-}
+      SMTP_PASSWORD: ${SMTP_PASSWORD:-}
+      ALERT_FROM: ${ALERT_FROM:-}
+      ALERT_TO: ${ALERT_TO:-}
+      KNOWLEDGE_DB: /app/private/knowledge/search.sqlite3
+      BOOKING_BINDINGS: /app/private/booking_bindings.json
+    volumes:
+      - bot-state:/app/data
+      - ${PRIVATE_DATA_DIR:?Mount private dataset separately}:/app/private:ro
+    security_opt:
+      - no-new-privileges:true
+    cap_drop: [ALL]
+    read_only: true
+    tmpfs: [/tmp]
+  watchdog:
+    build: .
+    restart: unless-stopped
+    command: [python, -m, cloud.service]
+    environment: *bot-env
+    volumes:
+      - bot-state:/app/data
+    security_opt:
+      - no-new-privileges:true
+    cap_drop: [ALL]
+    read_only: true
+    tmpfs: [/tmp]
+  agent:
+    build: .
+    restart: unless-stopped
+    command: [python, -m, cloud.agent]
+    environment: *bot-env
+    volumes:
+      - bot-state:/app/data
+      - ${PRIVATE_DATA_DIR:?Mount private dataset separately}:/app/private:ro
+    security_opt:
+      - no-new-privileges:true
+    cap_drop: [ALL]
+    read_only: true
+    tmpfs: [/tmp]
+volumes:
+  openwa-data:
+  bot-state:

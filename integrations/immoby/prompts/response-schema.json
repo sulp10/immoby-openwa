@@ -1,0 +1,102 @@
+{
+  "type": "object",
+  "properties": {
+    "guest_reply": {
+      "type": "string"
+    },
+    "language": {
+      "type": "string"
+    },
+    "property_id": {
+      "type": "string"
+    },
+    "issue": {
+      "type": "string",
+      "enum": [
+        "access",
+        "wifi",
+        "oven",
+        "toilet",
+        "hot_water",
+        "power",
+        "lift",
+        "water",
+        "other"
+      ]
+    },
+    "incident_id": {
+      "type": "string"
+    },
+    "severity": {
+      "type": "string",
+      "enum": [
+        "critical",
+        "urgent",
+        "routine",
+        "uncertain"
+      ]
+    },
+    "safety_signals": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "source_doc_ids": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "media_ids": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "next_step_id": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "action": {
+      "type": "string",
+      "enum": [
+        "clarify",
+        "offer_step",
+        "failed",
+        "resolved"
+      ]
+    },
+    "missing_facts": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "confidence": {
+      "type": "number"
+    },
+    "requires_operator": {
+      "type": "boolean"
+    }
+  },
+  "required": [
+    "guest_reply",
+    "language",
+    "property_id",
+    "issue",
+    "incident_id",
+    "severity",
+    "safety_signals",
+    "source_doc_ids",
+    "media_ids",
+    "next_step_id",
+    "action",
+    "missing_facts",
+    "confidence",
+    "requires_operator"
+  ],
+  "additionalProperties": false
+}

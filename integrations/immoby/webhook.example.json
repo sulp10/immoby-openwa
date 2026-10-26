@@ -1,0 +1,5 @@
+{
+  "url": "http://bot-api:8080/openwa/webhook",
+  "events": ["message.received", "session.status", "session.disconnected", "session.qr", "session.reconnect_loop", "session.restriction"],
+  "secret": "REPLACE_WITH_THE_SAME_PRIVATE_OPENWA_WEBHOOK_SECRET"
+}
