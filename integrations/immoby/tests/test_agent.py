@@ -1,8 +1,48 @@
-import json,tempfile,unittest
+import json,sqlite3,tempfile,unittest
 from pathlib import Path
+from unittest.mock import patch
 from cloud.openwa import Store
-from cloud.agent import booking_for,process_one,validate_triage,history_for
+from cloud.agent import booking_for,process_one,validate_triage,history_for,validate_sources
+from core.controller import retrieve,BookingContext
 class Tests(unittest.TestCase):
+ def test_quarantined_guide_cannot_reach_model_context(self):
+  with tempfile.TemporaryDirectory() as t:
+   path=Path(t)/'knowledge.sqlite3';c=sqlite3.connect(path)
+   c.executescript('CREATE TABLE documents(doc_id TEXT,property_id TEXT,source_kind TEXT,payload TEXT); CREATE VIRTUAL TABLE search USING fts5(doc_id UNINDEXED,text);')
+   for doc_id,quarantined in [('bad',True),('good',False)]:
+    c.execute('INSERT INTO documents VALUES (?,?,?,?)',(doc_id,'8','checkin',json.dumps({'doc_id':doc_id,'quarantined':quarantined})));c.execute('INSERT INTO search VALUES (?,?)',(doc_id,'portone'))
+   c.commit();c.close()
+   self.assertEqual([x['doc_id'] for x in retrieve(path,BookingContext('r','8',True,True),'portone')],['good'])
+ def test_critical_safety_reply_does_not_retrieve_unverified_property_guide(self):
+  class Fake:
+   calls=0
+   def complete(self,*args,**kwargs):
+    self.calls+=1
+    result={'issue':'other','severity':'critical','retrieval_query_it':'gas','search_kind':'none','failed_previous_step':False,'requested_human':False} if self.calls==1 else {'property_id':'8','source_doc_ids':['policy:safety'],'guest_reply':'Esci e chiama il 112 da fuori.','requires_operator':True,'action':'clarify'}
+    return {'content':json.dumps(result)},{}
+  with tempfile.TemporaryDirectory() as t,patch('cloud.agent.STATE',Path(t)),patch('cloud.agent.retrieve',side_effect=AssertionError('No guide for emergency')):
+   store=Store(':memory:');e=self.event();key,_=store.accept(e)
+   b={'verified_by_pms':True,'reservation_id':'current','property_id':'8','status':'confirmed','support_from':0,'support_until':200,'access_release_from':0,'access_release_until':200}
+   r=process_one(store,key,e,Fake(),{'s:390000000000@c.us':b},Path('/unused'),now=100);self.assertEqual(r['controller']['route'],'emergency');store.close()
+ def test_missing_access_instructions_force_handoff_without_three_fake_attempts(self):
+  class Fake:
+   calls=0
+   def complete(self,*args,**kwargs):
+    self.calls+=1
+    result={'issue':'access','severity':'routine','retrieval_query_it':'portone','search_kind':'none','failed_previous_step':False,'requested_human':False} if self.calls==1 else {'property_id':'8','source_doc_ids':[],'guest_reply':'Mancano le istruzioni di ingresso.','requires_operator':False,'action':'clarify'}
+    return {'content':json.dumps(result)},{}
+  with tempfile.TemporaryDirectory() as t,patch('cloud.agent.STATE',Path(t)),patch('cloud.agent.retrieve',return_value=[]):
+   store=Store(':memory:');e=self.event();key,_=store.accept(e)
+   b={'verified_by_pms':True,'reservation_id':'current','property_id':'8','status':'confirmed','support_from':0,'support_until':200,'access_release_from':0,'access_release_until':200}
+   r=process_one(store,key,e,Fake(),{'s:390000000000@c.us':b},Path('/unused'),now=100)
+   self.assertEqual(r['controller']['route'],'operator');self.assertTrue(r['draft']['requires_operator']);self.assertEqual(store.db.execute('SELECT count(*) FROM notices').fetchone()[0],1);store.close()
+ def test_general_sources_are_allowed_but_do_not_approve_property_facts(self):
+  docs=[{'doc_id':'current','source_sha256':'hash'}]
+  self.assertFalse(validate_sources(['general-playbook:access'],docs,'access',{'current':'hash'}))
+  self.assertFalse(validate_sources(['policy:safety'],[], 'other'))
+  self.assertTrue(validate_sources(['current','general-playbook:access'],docs,'access',{'current':'hash'}))
+  for ids in [['other-property'],['general-playbook:wifi'],[{}],'current']:
+   with self.assertRaises(PermissionError):validate_sources(ids,docs,'access')
  def test_history_cannot_cross_booking_or_property_or_support_window(self):
   s=Store(':memory:');e=self.event()
   for n,(reservation,property_id,created) in enumerate([('old','8',80),('current','9',80),('current','8',5),('current','8',80),('current','8',110)]):

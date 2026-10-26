@@ -50,3 +50,15 @@ Eseguire i test locali con `python3 -m unittest discover -s tests -v`. La config
 Il futuro adattatore PMS scrive `booking_bindings.json`, indicizzato per `sessionId:chatId`. Ogni voce richiede `verified_by_pms: true`, `reservation_id`, `property_id`, `status` (`confirmed` o `checked_in`), `support_from`, `support_until`, `access_release_from`, `access_release_until` come timestamp Unix. Sono opzionali `assigned_suite_id`, `human_takeover`, `incident_id` e `verified_address` con indirizzo, città e verifica esplicita. Il file è privato e il bot non può modificarlo.
 
 Restano da completare sincronizzazione PMS, dispatcher delle risposte, gestione degli incidenti successivi a una risoluzione, approvazione delle fonti, motore semantico, gestione completa degli allegati e console operatore. Questi elementi non vanno dedotti dalla presenza del solo gateway o del manifesto cloud.
+
+## Esclusioni del destinatario e sandbox locale
+
+`BOT_BLOCKED_PHONES` è una lista privata di numeri esclusi. Le esclusioni si applicano al ricevitore firmato, ai messaggi già in coda e al trasporto delle risposte. Tutti i gruppi, canali e broadcast vengono scartati prima di chiamare il modello. I contatti con identificativo `@lid` richiedono un numero risolto dal gateway; senza una corrispondenza verificabile vengono bloccati. Le conversazioni restano utilizzabili dagli operatori nella console OpenWA.
+
+La sandbox è disponibile su **http://127.0.0.1:18082/** con `compose.local.yaml`. Scegliere immobile, eventuale suite Doria, tipo di mittente e fase del soggiorno; poi avviare una nuova prova e scrivere come un ospite. La risposta usa il modello configurato e la conoscenza filtrata per immobile. Il costo API della prova è reale; la prenotazione è simulata.
+
+La sandbox non riceve credenziali WhatsApp o SMTP. Due controlli aggiuntivi impediscono le scritture verso OpenWA e l'invio di email in modalità sandbox. Stato, incidenti e conversazioni sono separati dal servizio operativo. Le richieste di intervento operatore vengono solo mostrate nella pagina. È accessibile soltanto da questo Mac e non da un telefono remoto.
+
+Il catalogo contiene 26 tipologie di alloggio, esclusi i quattro immobili non più gestiti. La conoscenza aggiornata contiene 111 sorgenti HTML non vuote e 1.500 frammenti. Quattro guide precedentemente esportate vuote sono state recuperate dall'editor KrossBooking. APT. MONTI (45) non ha una guida assegnata; DORIA TOT (3) richiede la suite effettiva 4–7. Le fonti restano da validare per l'invio automatico: l'importazione non certifica che codici o contatti siano attuali.
+
+Le prove comprendono il blocco del numero e dei gruppi anche attraverso il ricevitore HTTP firmato, senza aggiungere messaggi alla coda operativa, e risposte reali del modello a Wi-Fi, accesso e odore di gas. Non equivalgono a una validazione completa del servizio. L'associazione delle prenotazioni reali, il dispatcher e l'approvazione delle fonti restano da completare; nessuna risposta automatica agli ospiti è attiva.

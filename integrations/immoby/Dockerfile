@@ -4,7 +4,7 @@ RUN pip install --no-cache-dir gunicorn==26.2.0 && useradd --uid 10001 --create-
 COPY --chown=bot:bot cloud /app/cloud
 COPY --chown=bot:bot core /app/core
 COPY --chown=bot:bot prompts /app/prompts
-RUN mkdir -p /app/data /app/private && chown bot:bot /app/data /app/private
+RUN mkdir -p /app/data /app/private /app/sandbox-state && chown bot:bot /app/data /app/private /app/sandbox-state
 USER bot
 ENV STATE_DIR=/app/data PYTHONUNBUFFERED=1 PYTHONDONTWRITEBYTECODE=1
 EXPOSE 8080

@@ -33,6 +33,7 @@ def application(environ,start_response):
  body=json.dumps(result).encode();start_response(status,[('Content-Type','application/json'),('Content-Length',str(len(body))),('Cache-Control','no-store')]);return [body]
 
 def send_email(key,notice,*,smtp_factory=None):
+ if os.getenv('APP_MODE')=='sandbox':raise PermissionError('Email delivery is disabled in the sandbox')
  host=os.getenv('SMTP_HOST','');sender=os.getenv('ALERT_FROM','');recipients=[x.strip() for x in os.getenv('ALERT_TO','').split(',') if x.strip()]
  if not host or not sender or not recipients:raise RuntimeError('Verified email sender and recipients must be configured')
  subjects={'whatsapp_session_down':'WhatsApp richiede attenzione','whatsapp_session_recovered':'WhatsApp è di nuovo collegato','primary_phone_maintenance':'Controllo periodico del telefono WhatsApp','guest_requires_operator':'Un ospite ha bisogno di assistenza','setup_test':'Prova delle notifiche email'}

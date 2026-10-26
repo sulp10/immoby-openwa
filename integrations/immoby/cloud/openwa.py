@@ -1,5 +1,7 @@
 """OpenWA 0.25.0 protocol, verified against commit 0fb74b28b2f85b6fbc013cefcc727072806c9b56."""
 import hashlib,hmac,json,re,sqlite3,time,urllib.request,urllib.parse
+import os
+from cloud.policy import message_allowed,recipient_allowed
 MAX_BODY=1048576
 EVENTS={'message.received','session.status','session.disconnected','session.qr','session.reconnect_loop','session.restriction'}
 def verified_event(raw,signature,secret,allowed_sessions):
@@ -13,7 +15,7 @@ def verified_event(raw,signature,secret,allowed_sessions):
  if not isinstance(e.get('data'),dict) or not isinstance(e.get('idempotencyKey'),str) or not e['idempotencyKey']:raise ValueError('Invalid envelope')
  if e['event']=='message.received':
   d=e['data']
-  if d.get('fromMe') or d.get('isGroup') or str(d.get('from','')).endswith('@g.us'):return None
+  if not message_allowed(d):return None
   if not isinstance(d.get('id'),str) or not isinstance(d.get('from'),str):raise ValueError('Missing message identity')
   if not isinstance(d.get('body',''),str) or len(d.get('body',''))>16000:raise ValueError('Invalid message text')
  return e
@@ -78,10 +80,14 @@ class OpenWA:
   if url.scheme!='https' and not(url.scheme=='http' and url.hostname in {'openwa-api','localhost','127.0.0.1'}):raise ValueError('HTTPS required outside private container transport')
   if not re.fullmatch(r'[A-Za-z0-9-]{1,128}',session):raise ValueError('Invalid session ID')
   self.base=base_url.rstrip('/');self.key=api_key;self.session=session;self.transport=transport or urllib.request.urlopen
- def request(self,path,body=None,key=None):
+ def request(self,path,body=None,key=None,*,resolved_phone=None):
+  if body is not None and os.getenv('APP_MODE')=='sandbox':raise PermissionError('WhatsApp writes are disabled in the sandbox')
+  if body is not None and path.startswith('/messages/') and not recipient_allowed(body.get('chatId'),resolved_phone):raise PermissionError('Recipient is inhibited or unresolved')
   headers={'X-API-Key':self.key,'Content-Type':'application/json'}
   if key:headers['Idempotency-Key']=hashlib.sha256(key.encode()).hexdigest()
   request=urllib.request.Request(self.base+'/api/sessions/'+self.session+path,data=json.dumps(body).encode() if body is not None else None,headers=headers)
   with self.transport(request,timeout=20) as response:return json.load(response)
  def status(self):return self.request('')
- def send_text(self,chat_id,text,key):return self.request('/messages/send-text',{'chatId':chat_id,'text':text,'linkPreview':False},key)
+ def send_text(self,chat_id,text,key,*,resolved_phone=None):
+  if not recipient_allowed(chat_id,resolved_phone):raise PermissionError('Recipient is inhibited or unresolved')
+  return self.request('/messages/send-text',{'chatId':chat_id,'text':text,'linkPreview':False},key,resolved_phone=resolved_phone)

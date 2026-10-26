@@ -10,7 +10,30 @@ services:
     volumes: !override
       - bot-state:/app/data
       - private-runtime:/app/private:ro
+  sandbox:
+    build: .
+    restart: unless-stopped
+    command: [gunicorn, --bind, '0.0.0.0:8080', --workers, '1', --threads, '4', --timeout, '150', 'cloud.sandbox:application']
+    environment:
+      APP_MODE: sandbox
+      STATE_DIR: /app/sandbox-state
+      KNOWLEDGE_DB: /app/private/knowledge/search.sqlite3
+      PROPERTY_CATALOG: /app/private/property_registry.json
+      MODEL_PROVIDER: ${MODEL_PROVIDER:-zai}
+      ZAI_API_KEY: ${ZAI_API_KEY:-}
+      BOT_BLOCKED_PHONES: ${BOT_BLOCKED_PHONES:?Configure recipient exclusions}
+    volumes:
+      - sandbox-state:/app/sandbox-state
+      - private-runtime:/app/private:ro
+    ports:
+      - 127.0.0.1:18082:8080
+    security_opt:
+      - no-new-privileges:true
+    cap_drop: [ALL]
+    read_only: true
+    tmpfs: [/tmp]
 volumes:
+  sandbox-state:
   private-runtime:
     name: immoby-guest-private-runtime
     external: true

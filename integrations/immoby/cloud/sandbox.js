@@ -1,0 +1,1 @@
+document.querySelectorAll('form').forEach(form=>form.addEventListener('submit',()=>{const button=form.querySelector('button');if(button){button.disabled=true;button.textContent=form.classList.contains('composer')?'Sto preparando la risposta…':'Avvio…';}const status=form.querySelector('[role="status"]');if(status)status.hidden=false;}));

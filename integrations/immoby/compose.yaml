@@ -13,6 +13,7 @@ services:
       DATABASE_SYNCHRONIZE: "true"
       ENGINE_TYPE: baileys
       AUTO_START_SESSIONS: "true"
+      RESOLVE_LID_TO_PHONE: "true"
       SESSION_DATA_PATH: /app/data/sessions
       BAILEYS_AUTH_DIR: /app/data/baileys
       STORAGE_TYPE: local
@@ -35,6 +36,7 @@ services:
     environment: &bot-env
       STATE_DIR: /app/data
       DISCONNECT_GRACE_SECONDS: ${DISCONNECT_GRACE_SECONDS:-300}
+      BOT_BLOCKED_PHONES: ${BOT_BLOCKED_PHONES:?Configure recipient exclusions}
       OPENWA_BASE_URL: http://openwa-api:2785
       OPENWA_API_KEY: ${OPENWA_API_KEY:-}
       OPENWA_SESSIONS: ${OPENWA_SESSIONS:-}

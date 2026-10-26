@@ -33,7 +33,7 @@ def retrieve(db,ctx,query,limit=5,source_kinds=('checkin','manual')):
  match=' OR '.join('"'+w+'"' for w in words)
  con=sqlite3.connect('file:'+str(Path(db).resolve())+'?mode=ro',uri=True)
  try:
-  rows=con.execute('SELECT d.payload FROM search s JOIN documents d ON d.doc_id=s.doc_id WHERE search MATCH ? AND d.property_id=? AND d.source_kind IN ('+','.join('?' for _ in source_kinds)+') ORDER BY bm25(search) LIMIT ?',[match,pid,*source_kinds,min(max(int(limit),1),10)]).fetchall()
+  rows=con.execute("SELECT d.payload FROM search s JOIN documents d ON d.doc_id=s.doc_id WHERE search MATCH ? AND d.property_id=? AND COALESCE(json_extract(d.payload,'$.quarantined'),0)=0 AND d.source_kind IN ("+','.join('?' for _ in source_kinds)+') ORDER BY bm25(search) LIMIT ?',[match,pid,*source_kinds,min(max(int(limit),1),10)]).fetchall()
  finally:con.close()
  return [json.loads(r[0]) for r in rows]
 
