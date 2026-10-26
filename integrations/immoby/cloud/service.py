@@ -94,6 +94,7 @@ def watchdog_tick(store,clients,now=None):
 
 def main():
  if not sessions():raise RuntimeError('Configure the actual OpenWA session IDs')
+ if not os.getenv('OPENWA_API_KEY'):raise RuntimeError('Configure the session-scoped operator API key')
  clients={s:OpenWA(os.getenv('OPENWA_BASE_URL','http://openwa-api:2785'),os.environ['OPENWA_API_KEY'],s) for s in sessions()}
  store=database()
  while True:

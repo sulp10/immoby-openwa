@@ -7,7 +7,7 @@ services:
     environment:
       NODE_ENV: production
       PORT: 2785
-      API_MASTER_KEY: ${OPENWA_API_KEY:?Configure a strong key}
+      API_MASTER_KEY: ${OPENWA_MASTER_KEY:?Configure an administrator key}
       DATABASE_TYPE: sqlite
       DATABASE_NAME: /app/data/openwa.sqlite
       DATABASE_SYNCHRONIZE: "true"
@@ -36,8 +36,8 @@ services:
       STATE_DIR: /app/data
       DISCONNECT_GRACE_SECONDS: ${DISCONNECT_GRACE_SECONDS:-300}
       OPENWA_BASE_URL: http://openwa-api:2785
-      OPENWA_API_KEY: ${OPENWA_API_KEY:?Configure a strong key}
-      OPENWA_SESSIONS: ${OPENWA_SESSIONS:?Configure session IDs after pairing}
+      OPENWA_API_KEY: ${OPENWA_API_KEY:-}
+      OPENWA_SESSIONS: ${OPENWA_SESSIONS:-}
       OPENWA_WEBHOOK_SECRET: ${OPENWA_WEBHOOK_SECRET:?Configure an independent strong secret}
       MODEL_PROVIDER: ${MODEL_PROVIDER:-zai}
       ZAI_API_KEY: ${ZAI_API_KEY:-}
