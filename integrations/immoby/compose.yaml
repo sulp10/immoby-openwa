@@ -57,6 +57,7 @@ services:
       ALERT_TO: ${ALERT_TO:-}
       KNOWLEDGE_DB: /app/private/knowledge/search.sqlite3
       BOOKING_BINDINGS: /app/private/booking_bindings.json
+      PROPERTY_CATALOG: /app/private/property_registry.json
     volumes:
       - bot-state:/app/data
       - ${PRIVATE_DATA_DIR:?Mount private dataset separately}:/app/private:ro
