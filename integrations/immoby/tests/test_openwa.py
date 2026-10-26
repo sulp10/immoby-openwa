@@ -29,7 +29,14 @@ class Tests(unittest.TestCase):
  def test_logout_alert_without_wait(self):
   s=Store(':memory:');s.observe('s','qr_ready',reason='LOGOUT',now=100);notice=json.loads(s.db.execute('SELECT payload FROM notices').fetchone()[0]);self.assertTrue(notice['relink_required']);self.assertNotIn('qr',notice);s.close()
  def test_recovery_requires_stability(self):
-  s=Store(':memory:');s.observe('s','failed',now=100);s.observe('s','failed',now=400);s.observe('s','ready',now=410);s.observe('s','ready',now=471);self.assertEqual(s.db.execute('SELECT count(*) FROM notices').fetchone()[0],2);s.close()
+  s=Store(':memory:');s.observe('s','failed',now=100);s.observe('s','failed',now=400)
+  with s.db:s.db.execute("UPDATE notices SET state='sent'")
+  s.observe('s','ready',now=410);s.observe('s','ready',now=469);self.assertEqual(s.db.execute('SELECT count(*) FROM notices').fetchone()[0],1)
+  s.observe('s','ready',now=471);self.assertEqual(s.db.execute('SELECT count(*) FROM notices').fetchone()[0],2);s.close()
+ def test_recovered_session_does_not_send_stale_unsent_outage(self):
+  s=Store(':memory:');s.observe('s','qr_ready',now=100);s.observe('s','ready',now=150);s.observe('s','disconnected',now=160);s.observe('s','ready',now=170);s.observe('s','ready',now=231)
+  self.assertEqual(s.db.execute("SELECT count(*) FROM notices WHERE state='pending'").fetchone()[0],0)
+  self.assertEqual(s.db.execute('SELECT state FROM notices').fetchone()[0],'resolved_before_delivery');s.close()
  def test_maintenance_is_not_fake_expiry(self):
   s=Store(':memory:');s.observe('s','ready',now=100);s.weekly_phone_reminder('s',now=8*86400);s.weekly_phone_reminder('s',now=8*86400+60);self.assertEqual(s.db.execute('SELECT count(*) FROM notices').fetchone()[0],1);s.close()
  def test_send_endpoint_and_idempotency(self):

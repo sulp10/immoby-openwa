@@ -1,0 +1,114 @@
+{
+  "model": "glm-5.3-flash",
+  "synthetic_only": true,
+  "results": [
+    {
+      "expected_language": "it",
+      "reply": "Ecco le credenziali Wi-Fi:\n\nRete: IMMOBY-TEST\nPassword: TEST-ONLY-47!\n\nSe la connessione non riesce, mi faccia sapere cosa le appare e procediamo insieme.",
+      "reported_language": "it",
+      "language_match": true,
+      "credentials_preserved": true,
+      "usage": {
+        "completion_tokens": 172,
+        "completion_tokens_details": {
+          "reasoning_tokens": 9
+        },
+        "prompt_tokens": 2083,
+        "prompt_tokens_details": {
+          "cached_tokens": 0
+        },
+        "total_tokens": 2255
+      }
+    },
+    {
+      "expected_language": "en",
+      "reply": "The Wi-Fi network is IMMOBY-TEST and the password is below.\n\nTEST-ONLY-47!",
+      "reported_language": "en",
+      "language_match": true,
+      "credentials_preserved": true,
+      "usage": {
+        "completion_tokens": 151,
+        "completion_tokens_details": {
+          "reasoning_tokens": 16
+        },
+        "prompt_tokens": 2082,
+        "prompt_tokens_details": {
+          "cached_tokens": 2048
+        },
+        "total_tokens": 2233
+      }
+    },
+    {
+      "expected_language": "fr",
+      "reply": "Voici les informations Wi-Fi :\n\nIMMOBY-TEST\n\nTEST-ONLY-47!\n\nDites-moi si la connexion fonctionne.",
+      "reported_language": "fr",
+      "language_match": true,
+      "credentials_preserved": true,
+      "usage": {
+        "completion_tokens": 144,
+        "completion_tokens_details": {
+          "reasoning_tokens": 0
+        },
+        "prompt_tokens": 2085,
+        "prompt_tokens_details": {
+          "cached_tokens": 2048
+        },
+        "total_tokens": 2229
+      }
+    },
+    {
+      "expected_language": "de",
+      "reply": "Das WLAN-Passwort lautet:\n\nTEST-ONLY-47!\n\nVerbinden Sie sich mit dem Netzwerk IMMOBY-TEST.",
+      "reported_language": "de",
+      "language_match": true,
+      "credentials_preserved": true,
+      "usage": {
+        "completion_tokens": 158,
+        "completion_tokens_details": {
+          "reasoning_tokens": 9
+        },
+        "prompt_tokens": 2084,
+        "prompt_tokens_details": {
+          "cached_tokens": 0
+        },
+        "total_tokens": 2242
+      }
+    },
+    {
+      "expected_language": "es",
+      "reply": "La red Wi-Fi es IMMOBY-TEST y la contraseña es:\n\nTEST-ONLY-47!\n\nSi no consigue conectarse, dígame qué mensaje le aparece y lo revisamos juntos.",
+      "reported_language": "es",
+      "language_match": true,
+      "credentials_preserved": true,
+      "usage": {
+        "completion_tokens": 172,
+        "completion_tokens_details": {
+          "reasoning_tokens": 17
+        },
+        "prompt_tokens": 2084,
+        "prompt_tokens_details": {
+          "cached_tokens": 2048
+        },
+        "total_tokens": 2256
+      }
+    },
+    {
+      "expected_language": "pt",
+      "reply": "Aqui está a informação da rede Wi-Fi:\n\nIMMOBY-TEST\n\nTEST-ONLY-47!\n\nSe não conseguir ligar, diga-me o que aparece no dispositivo e ajudo a partir daí.",
+      "reported_language": "pt",
+      "language_match": true,
+      "credentials_preserved": true,
+      "usage": {
+        "completion_tokens": 180,
+        "completion_tokens_details": {
+          "reasoning_tokens": 12
+        },
+        "prompt_tokens": 2085,
+        "prompt_tokens_details": {
+          "cached_tokens": 2048
+        },
+        "total_tokens": 2265
+      }
+    }
+  ]
+}

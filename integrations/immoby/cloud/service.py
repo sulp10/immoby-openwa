@@ -1,7 +1,7 @@
 """Durable OpenWA receiver and independent email session watchdog.
 This service does not enable guest auto-replies. Agent integration remains shadow.
 """
-import json,os,smtplib,ssl,time
+import base64,json,os,smtplib,ssl,time
 from email.message import EmailMessage
 from pathlib import Path
 from cloud.openwa import Store,OpenWA,verified_event,MAX_BODY
@@ -35,7 +35,7 @@ def application(environ,start_response):
 def send_email(key,notice,*,smtp_factory=None):
  host=os.getenv('SMTP_HOST','');sender=os.getenv('ALERT_FROM','');recipients=[x.strip() for x in os.getenv('ALERT_TO','').split(',') if x.strip()]
  if not host or not sender or not recipients:raise RuntimeError('Verified email sender and recipients must be configured')
- subjects={'whatsapp_session_down':'WhatsApp richiede attenzione','whatsapp_session_recovered':'WhatsApp è di nuovo collegato','primary_phone_maintenance':'Controllo periodico del telefono WhatsApp','guest_requires_operator':'Un ospite ha bisogno di assistenza'}
+ subjects={'whatsapp_session_down':'WhatsApp richiede attenzione','whatsapp_session_recovered':'WhatsApp è di nuovo collegato','primary_phone_maintenance':'Controllo periodico del telefono WhatsApp','guest_requires_operator':'Un ospite ha bisogno di assistenza','setup_test':'Prova delle notifiche email'}
  kind=notice['kind'];message=EmailMessage();message['Subject']='Immoby · '+subjects.get(kind,'Avviso operativo');message['From']=sender;message['To']=', '.join(recipients)
  import hashlib
  message['Message-ID']='<'+hashlib.sha256(key.encode()).hexdigest()+'@immoby-alerts>'
@@ -45,6 +45,7 @@ def send_email(key,notice,*,smtp_factory=None):
   text+='È necessario ricollegare il telefono dalla console protetta.' if notice.get('relink_required') else 'Il sistema sta verificando il collegamento; controlla la console protetta se il problema continua.'
  elif kind=='whatsapp_session_recovered':text='La sessione WhatsApp è di nuovo collegata e risulta stabile da almeno un minuto. Verifica nella console gli eventuali messaggi rimasti in attesa.'
  elif kind=='primary_phone_maintenance':text=notice['instruction']
+ elif kind=='setup_test':text='Questa è una prova di invio delle notifiche Immoby. La configurazione del mittente è stata accettata dal server di posta. Verifica la ricezione di questa email prima di considerare attivi gli avvisi.'
  else:text='È richiesto l’intervento di un operatore. Controlla la console protetta per i dettagli.'
  message.set_content(text+'\n\nSessione: '+str(notice.get('session',''))+'\nNon sono inclusi QR, codici di accesso o dati personali degli ospiti.')
  port=int(os.getenv('SMTP_PORT','587'))
@@ -52,12 +53,14 @@ def send_email(key,notice,*,smtp_factory=None):
  if security not in {'ssl','starttls'}:raise ValueError('Encrypted SMTP transport required')
  context=ssl.create_default_context()
  factory=smtp_factory or (smtplib.SMTP_SSL if security=='ssl' else smtplib.SMTP)
- kwargs={'timeout':20}
+ kwargs={'timeout':45,'local_hostname':'immoby.org'}
  if security=='ssl':kwargs['context']=context
  with factory(host,port,**kwargs) as smtp:
   smtp.ehlo()
   if security=='starttls':smtp.starttls(context=context);smtp.ehlo()
-  if os.getenv('SMTP_USER'):smtp.login(os.environ['SMTP_USER'],os.environ['SMTP_PASSWORD'])
+  if os.getenv('SMTP_USER'):
+   password=base64.b64decode(os.environ['SMTP_PASSWORD_B64'],validate=True).decode('utf-8') if os.getenv('SMTP_PASSWORD_B64') else os.environ['SMTP_PASSWORD']
+   smtp.login(os.environ['SMTP_USER'],password)
   smtp.send_message(message)
 
 def drain_notices(store,send=send_email,now=None):

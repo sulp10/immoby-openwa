@@ -50,6 +50,7 @@ services:
       SMTP_SECURITY: ${SMTP_SECURITY:-starttls}
       SMTP_USER: ${SMTP_USER:-}
       SMTP_PASSWORD: ${SMTP_PASSWORD:-}
+      SMTP_PASSWORD_B64: ${SMTP_PASSWORD_B64:-}
       ALERT_FROM: ${ALERT_FROM:-}
       ALERT_TO: ${ALERT_TO:-}
       KNOWLEDGE_DB: /app/private/knowledge/search.sqlite3

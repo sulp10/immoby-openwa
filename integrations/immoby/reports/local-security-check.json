@@ -1,0 +1,14 @@
+{
+  "operator_cannot_admin_keys": true,
+  "secrets_in_tracked_files": [],
+  "npm_vulnerability_counts": {
+    "info": 0,
+    "low": 0,
+    "moderate": 0,
+    "high": 0,
+    "critical": 0,
+    "total": 0
+  },
+  "npm_audit_error": null,
+  "private_env_permissions": "0o600"
+}

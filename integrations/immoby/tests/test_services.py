@@ -5,10 +5,26 @@ from cloud.openwa import Store
 from cloud.service import application,drain_notices,watchdog_tick,send_email
 from cloud.providers import ChatClient,nearby_search
 class Tests(unittest.TestCase):
+ def test_saved_smtp_password_is_decoded_without_compose_interpolation(self):
+  import base64
+  calls=[]
+  class SMTP:
+   def __init__(self,*a,**k):pass
+   def __enter__(self):return self
+   def __exit__(self,*a):pass
+   def ehlo(self):pass
+   def login(self,user,password):calls.append((user,password))
+   def send_message(self,msg):pass
+  password="example$with#symbols'and=signs"
+  with patch.dict(os.environ,{'SMTP_HOST':'smtp.test.invalid','SMTP_PORT':'465','SMTP_SECURITY':'ssl','SMTP_USER':'bot@example.invalid','SMTP_PASSWORD':'','SMTP_PASSWORD_B64':base64.b64encode(password.encode()).decode(),'ALERT_FROM':'bot@example.invalid','ALERT_TO':'owner@example.invalid'}):
+   send_email('test',{'kind':'setup_test'},smtp_factory=SMTP)
+  self.assertEqual(calls,[('bot@example.invalid',password)])
  def test_email_supports_implicit_tls_without_plain_connection(self):
   calls=[]
   class FakeSMTP:
-   def __init__(self,host,port,**kwargs):calls.append(('connect',host,port,'context' in kwargs))
+   def __init__(self,host,port,**kwargs):
+    assert '.' in kwargs['local_hostname'];assert kwargs['timeout']>=45
+    calls.append(('connect',host,port,'context' in kwargs))
    def __enter__(self):return self
    def __exit__(self,*a):pass
    def ehlo(self):pass

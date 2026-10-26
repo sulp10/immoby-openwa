@@ -1,8 +1,15 @@
 import json,tempfile,unittest
 from pathlib import Path
 from cloud.openwa import Store
-from cloud.agent import booking_for,process_one,validate_triage
+from cloud.agent import booking_for,process_one,validate_triage,history_for
 class Tests(unittest.TestCase):
+ def test_history_cannot_cross_booking_or_property_or_support_window(self):
+  s=Store(':memory:');e=self.event()
+  for n,(reservation,property_id,created) in enumerate([('old','8',80),('current','9',80),('current','8',5),('current','8',80),('current','8',110)]):
+   previous={**e,'data':{**e['data'],'id':str(n)}};k,_=s.accept(previous)
+   with s.db:s.db.execute('INSERT INTO drafts VALUES (?,?,?)',(k,json.dumps({'reservation_id':reservation,'draft':{'property_id':property_id,'guest_reply':str(n)}}),created))
+  history=history_for(s,e,{'reservation_id':'current','property_id':'8','support_from':10},now=100)
+  self.assertEqual([h['draft']['guest_reply'] for h in history],['3']);s.close()
  def test_triage_rejects_non_string_retrieval_query(self):
   value={'issue':'access','severity':'routine','retrieval_query_it':['codice'],'search_kind':'none','failed_previous_step':False,'requested_human':False}
   with self.assertRaises(ValueError):validate_triage(value)
@@ -17,7 +24,7 @@ class Tests(unittest.TestCase):
    def complete(self,messages,**kwargs):self.messages=messages;raise Captured()
   for previous_reservation,expected in [('current','access'),('older',None)]:
    s=Store(':memory:');e=self.event();old={**e,'data':{**e['data'],'id':'previous'}};old_key,_=s.accept(old)
-   with s.db:s.db.execute('INSERT INTO drafts VALUES (?,?,?)',(old_key,json.dumps({'reservation_id':previous_reservation,'triage':{'issue':'access'}}),90))
+   with s.db:s.db.execute('INSERT INTO drafts VALUES (?,?,?)',(old_key,json.dumps({'reservation_id':previous_reservation,'triage':{'issue':'access'},'draft':{'property_id':'8'}}),90))
    b={'verified_by_pms':True,'reservation_id':'current','property_id':'8','status':'confirmed','support_from':0,'support_until':200}
    key,_=s.accept(e);client=Fake()
    with self.assertRaises(Captured):process_one(s,key,e,client,{'s:390000000000@c.us':b},Path('/not-used'),now=100)

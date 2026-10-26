@@ -55,7 +55,14 @@ class Store:
    self.notice(f'session:{session}:{incident}:down',{'kind':'whatsapp_session_down','session':session,'status':status,'relink_required':hard,'reconnect_attempts':reconnect_attempts,'reason_category':'authentication' if hard else 'connectivity','contains_auth_material':False},now)
   if status=='ready' and old!='unknown' and now-changed>=60:
    down=f'session:{session}:{incident}:down'
-   if self.db.execute('SELECT 1 FROM notices WHERE k=?',(down,)).fetchone():self.notice(f'session:{session}:{incident}:recovered',{'kind':'whatsapp_session_recovered','session':session},now)
+   row=self.db.execute('SELECT state FROM notices WHERE k=?',(down,)).fetchone()
+   if row and row[0]=='sent':self.notice(f'session:{session}:{incident}:recovered',{'kind':'whatsapp_session_recovered','session':session},now)
+   # A delayed mail transport must not announce an outage after stable recovery.
+   with self.db:
+    self.db.execute("UPDATE notices SET state='resolved_before_delivery' WHERE state='pending' AND json_extract(payload,'$.session')=? AND json_extract(payload,'$.kind')='whatsapp_session_down'",(session,))
+    for key, in self.db.execute("SELECT k FROM notices WHERE state='pending' AND json_extract(payload,'$.session')=? AND json_extract(payload,'$.kind')='whatsapp_session_recovered'",(session,)).fetchall():
+     original=self.db.execute('SELECT state FROM notices WHERE k=?',(key.rsplit(':',1)[0]+':down',)).fetchone()
+     if not original or original[0]!='sent':self.db.execute("UPDATE notices SET state='resolved_before_delivery' WHERE k=?",(key,))
   return {'status':status,'incident':incident,'needs_relink':hard}
  def weekly_phone_reminder(self,session,now=None):
   now=time.time() if now is None else now
